@@ -12,7 +12,7 @@ function App() {
     setInput(e.target.value);
   }
 
-  function createToDo(e) {
+  function createTodo(e) {
     e.preventDefault();
 
     const newTodo = {
@@ -25,10 +25,22 @@ function App() {
     setInput('');
   }
 
+  function completeTodo(id) {
+    const newTodoItems = todoItems.map((item) => {
+      if (item.id === id) {
+        item.isComplete = !item.isComplete;
+      }
+
+      return item;
+    });
+
+    setTodoItems(newTodoItems);
+  }
+
   const todoList = todoItems.map((item) => {
     return (
       <li key={item.id}>
-        <input type="checkbox" value={item.isComplete} />
+        <input type="checkbox" onChange={() => completeTodo(item.id)} />
         {item.description}
         <button>X</button>
       </li>
@@ -37,7 +49,7 @@ function App() {
 
   return (
     <>
-      <form onSubmit={createToDo}>
+      <form onSubmit={createTodo}>
         <input type="text" value={input} onChange={handleInput} />
         <input type="submit" value="Create To-Do" />
       </form>
