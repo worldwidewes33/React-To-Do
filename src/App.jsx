@@ -37,12 +37,18 @@ function App() {
     setTodoItems(newTodoItems);
   }
 
+  function deleteTodo(id) {
+    const newTodoItems = todoItems.filter((item) => item.id !== id);
+
+    setTodoItems(newTodoItems);
+  }
+
   const todoList = todoItems.map((item) => {
     return (
-      <li key={item.id}>
+      <li key={item.id} className={`${item.isComplete ? 'completed' : ''}`}>
         <input type="checkbox" onChange={() => completeTodo(item.id)} />
-        {item.description}
-        <button>X</button>
+        <p>{item.description}</p>
+        <button onClick={() => deleteTodo(item.id)}>X</button>
       </li>
     );
   });

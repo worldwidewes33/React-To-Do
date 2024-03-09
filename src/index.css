@@ -17,3 +17,7 @@ li {
   align-items: center;
   font-size: 1.6rem;
 }
+
+.completed p {
+  text-decoration: line-through wavy;
+}
